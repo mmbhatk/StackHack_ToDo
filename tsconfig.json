@@ -16,7 +16,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@stack-hack-to-do/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@stack-hack-to-do/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@stack-hack-to-do/data": ["libs/data/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
