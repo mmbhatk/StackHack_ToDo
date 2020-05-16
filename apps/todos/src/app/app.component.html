@@ -33,15 +33,7 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <mat-accordion>
-        <mat-expansion-panel hideToggle="true">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Personal data
-            </mat-panel-title>
-            <mat-panel-description> </mat-panel-description>
-          </mat-expansion-panel-header>
-        </mat-expansion-panel>
+      <mat-accordion class="example-headers-align">
         <mat-expansion-panel hideToggle="true">
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -51,18 +43,40 @@
           </mat-expansion-panel-header>
           <mat-form-field>
             <mat-label>Description</mat-label>
-            <input matInput />
+            <input matInput [(ngModel)]="description" #desc="ngModel" />
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Due Date</mat-label>
-            <input matInput [matDatepicker]="picker" />
+            <input matInput [matDatepicker]="picker" [(ngModel)]="date" />
             <mat-datepicker-toggle
               matSuffix
               [for]="picker"
             ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
+          <button
+            mat-button
+            [disabled]="!desc.errors.minlength"
+            (click)="save()"
+          >
+            Save
+          </button>
+        </mat-expansion-panel>
+        <mat-expansion-panel *ngFor="let task of tasks" hideToggle="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ task.description }}
+            </mat-panel-title>
+            <mat-panel-description>
+              <span *ngIf="days_between(task.dueDate, today) < 7">{{
+                task.dueDate | date: 'EEEE hh:mm a'
+              }}</span>
+              <span *ngIf="days_between(task.dueDate, today) >= 7">{{
+                task.dueDate | date: 'MMM d, h:mm a'
+              }}</span>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
         </mat-expansion-panel>
       </mat-accordion>
     </mat-sidenav-content>
