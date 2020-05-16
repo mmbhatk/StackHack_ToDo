@@ -34,36 +34,35 @@
 
     <mat-sidenav-content>
       <mat-accordion>
-        <mat-expansion-panel>
+        <mat-expansion-panel hideToggle="true">
           <mat-expansion-panel-header>
             <mat-panel-title>
               Personal data
             </mat-panel-title>
-            <mat-panel-description>
-              Type your name and age
-            </mat-panel-description>
+            <mat-panel-description> </mat-panel-description>
           </mat-expansion-panel-header>
-
+        </mat-expansion-panel>
+        <mat-expansion-panel hideToggle="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Add Note
+            </mat-panel-title>
+            <mat-panel-description> </mat-panel-description>
+          </mat-expansion-panel-header>
           <mat-form-field>
-            <mat-label>First name</mat-label>
+            <mat-label>Description</mat-label>
             <input matInput />
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label>Age</mat-label>
-            <input matInput type="number" min="1" />
+            <mat-label>Due Date</mat-label>
+            <input matInput [matDatepicker]="picker" />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Self aware panel
-            </mat-panel-title>
-            <mat-panel-description>
-              Currently I am broke
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <p>I'm visible because I am open</p>
         </mat-expansion-panel>
       </mat-accordion>
     </mat-sidenav-content>
