@@ -1,0 +1,20 @@
+.search-bar {
+  width: 35%;
+  padding-left: 30%;
+}
+
+.darkModeButton {
+  margin-left: 28%;
+}
+
+.label {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 3%;
+  height: 50px;
+  font-size: 25px;
+  /* font-family: "Times New Roman", Times, serif; */
+  font-family: "Lucida Console", Courier, monospace;
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-weight: bolder;
+}

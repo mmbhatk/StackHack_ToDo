@@ -1,5 +1,23 @@
-<h1>Random Form</h1>
-Name: <input type = "text" [(ngModel)] = "name"><br><br>
-Age: <input type = "age" [(ngModel)] = "age"><br><br>
+<mat-form-field class="search-bar">
+  <mat-label>Search</mat-label>
+  <textarea matInput placeholder="Search"></textarea>
+</mat-form-field>
 
-<button (click) = "saveData()">Save</button> &nbsp;&nbsp;
+<a href = "http://google.com"><mat-icon>search</mat-icon></a>
+
+<mat-slide-toggle class = "darkModeButton" matTooltip="Dark Mode"></mat-slide-toggle>
+
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>All</ng-template>
+    <p>Content 1</p>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>Primary</ng-template>
+    <p>Content 2</p>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>Work</ng-template>
+    <p>Content 3</p>
+  </mat-tab>
+</mat-tab-group>

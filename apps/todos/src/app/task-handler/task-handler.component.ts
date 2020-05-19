@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-
 @Component({
   selector: 'stack-hack-to-do-task-handler',
   templateUrl: './task-handler.component.html',
