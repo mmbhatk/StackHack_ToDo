@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module'
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatGridListModule } from '@angular/material/grid-list';
 import 'hammerjs';
 
 @NgModule({
@@ -24,7 +26,9 @@ import 'hammerjs';
     AppRoutingModule,
     MatTabsModule,
     MatSlideToggleModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressBarModule,
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

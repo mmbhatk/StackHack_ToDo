@@ -21,10 +21,13 @@
       [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56">
       <mat-nav-list>
-        <a mat-list-item routerLink="/stack-hack-to-do-task-handler" routerLinkActive="active">Tasks</a>
-        <a mat-list-item routerLink=".">Calender View</a>
-        <a mat-list-item routerLink=".">Profile</a>
-        <a mat-list-item routerLink=".">Settings</a>
+        <a mat-list-item routerLink="/stack-hack-to-do-task-handler" routerLinkActive="active">TASKS</a>
+        <a mat-list-item routerLink=".">CALENDAR</a>
+        <a mat-list-item routerLink=".">PROFILE</a>
+        <a mat-list-item routerLink=".">SETTINGS</a>
+        <a mat-list-item routerLink=".">PROGRESS</a>
+        <mat-list-item>Level {{ level }} <span style = "padding-left: 40%;">{{ points_scored }}/{{ total_points }}</span></mat-list-item>
+        <mat-list-item><mat-progress-bar mode="determinate" value="40"></mat-progress-bar></mat-list-item>
       </mat-nav-list>
     </mat-sidenav>
     <router-outlet></router-outlet>

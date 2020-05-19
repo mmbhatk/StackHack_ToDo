@@ -10,6 +10,9 @@ import { Task } from '@stack-hack-to-do/api-interfaces';
 })
 export class AppComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
+  level: number = 5;
+  points_scored: number = 400;
+  total_points: number = 1000;
 
   description: string;
   date = new Date();
