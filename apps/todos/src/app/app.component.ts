@@ -1,7 +1,7 @@
 import { Component, ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { HttpClient } from '@angular/common/http';
-import { Message } from '@stack-hack-to-do/api-interfaces';
+import { ToDo } from '@stack-hack-to-do/api-interfaces';
 
 @Component({
   selector: 'stack-hack-to-do-root',
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private _mobileQueryListener: () => void;
 
-  tasks: Message[];
+  tasks: ToDo[];
 
   today = new Date();
 
