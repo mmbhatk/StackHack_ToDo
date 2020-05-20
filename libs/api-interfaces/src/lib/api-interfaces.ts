@@ -1,4 +1,4 @@
-export interface Task {
+export interface Message {
   description: string;
   dueDate: Date;
 }
