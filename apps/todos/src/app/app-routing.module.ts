@@ -3,11 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { TaskHandlerComponent } from './task-handler/task-handler.component';
 
 const routes: Routes = [
-  { path: 'stack-hack-to-do-task-handler', component: TaskHandlerComponent }
+  { path: 'stack-hack-to-do-task-handler', component: TaskHandlerComponent },
+  { path: '', redirectTo: 'stack-hack-to-do-task-handler', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
