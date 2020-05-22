@@ -2,15 +2,14 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TaskHandlerComponent } from './task-handler.component';
 
-describe('TaskHandlerComponent', () => {
+describe('DashboardComponent', () => {
   let component: TaskHandlerComponent;
   let fixture: ComponentFixture<TaskHandlerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TaskHandlerComponent ]
-    })
-    .compileComponents();
+      declarations: [TaskHandlerComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
