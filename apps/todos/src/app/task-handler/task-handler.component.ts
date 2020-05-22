@@ -6,6 +6,7 @@ import {
   MAT_DIALOG_DATA,
   MatDialog,
 } from '@angular/material/dialog';
+import { DashboardService } from './task-handler.service';
 
 @Component({
   selector: 'stack-hack-to-do-task-handler',
@@ -18,31 +19,23 @@ export class TaskHandlerComponent implements OnInit {
 
   search: string;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private dashboardService: DashboardService
+  ) {}
 
   ngOnInit(): void {
-    this.tasks = [
-      {
-        description: 'Greet Manu',
-        dueDate: new Date(2020, 6, 1),
-      },
-      {
-        description: 'Talk to Manu',
-        dueDate: new Date(),
-      },
-      {
-        description: 'Trouble Manu',
-        dueDate: new Date(),
-      },
-    ];
+    this.dashboardService.getTasks().subscribe((tasks) => (this.tasks = tasks));
   }
 
   days_between(date1: Date, date2: Date): number {
     // The number of milliseconds in one day
     const ONE_DAY = 1000 * 60 * 60 * 24;
 
-    // Calculate the difference in milliseconds
-    const differenceMs = Math.abs(date1.getTime() - date2.getTime());
+    let differenceMs = 0;
+    if (date1 instanceof Date && date2 instanceof Date)
+      // Calculate the difference in milliseconds
+      differenceMs = Math.abs(date1.getTime() - date2.getTime());
 
     // Convert back to days and return
     return Math.round(differenceMs / ONE_DAY);
@@ -54,8 +47,10 @@ export class TaskHandlerComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      this.tasks.push(result);
+      if (result)
+        this.dashboardService
+          .postTask(result)
+          .subscribe((response: ToDo) => this.tasks.push(response));
     });
   }
 }

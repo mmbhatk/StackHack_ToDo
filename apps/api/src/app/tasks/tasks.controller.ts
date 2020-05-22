@@ -10,6 +10,7 @@ export class TasksController {
   @Post()
   async create(@Body() createCatDto: CreateTodoDto) {
     await this.tasksService.create(createCatDto);
+    return createCatDto;
   }
 
   @Get()
