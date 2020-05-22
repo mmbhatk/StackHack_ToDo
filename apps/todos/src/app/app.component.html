@@ -7,8 +7,12 @@
     >
       <mat-icon>menu</mat-icon>
     </button>
-    <span class="example-fill-remaining-space"></span>
     <h1 class="app-name">Task Manager</h1>
+    <span class="example-fill-remaining-space"></span>
+    <mat-slide-toggle
+      class="darkModeButton"
+      matTooltip="Dark Mode"
+    ></mat-slide-toggle>
   </mat-toolbar>
 
   <mat-sidenav-container
@@ -46,7 +50,6 @@
         ></mat-list-item>
       </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content>
-      <router-outlet></router-outlet> </mat-sidenav-content
+    <mat-sidenav-content> <router-outlet></router-outlet> </mat-sidenav-content
   ></mat-sidenav-container>
 </div>
