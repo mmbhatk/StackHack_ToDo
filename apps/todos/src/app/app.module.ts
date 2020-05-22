@@ -7,27 +7,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatGridListModule } from '@angular/material/grid-list';
+
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [AppComponent, TaskHandlerComponent],
+  declarations: [AppComponent, TaskHandlerComponent, DashboardComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
-    MatTabsModule,
-    MatSlideToggleModule,
-    MatTooltipModule,
-    MatProgressBarModule,
-    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

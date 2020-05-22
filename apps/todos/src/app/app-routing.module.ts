@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TaskHandlerComponent } from './task-handler/task-handler.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: 'stack-hack-to-do-task-handler', component: TaskHandlerComponent },
-  { path: '', redirectTo: 'stack-hack-to-do-task-handler', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 ];
 
 @NgModule({

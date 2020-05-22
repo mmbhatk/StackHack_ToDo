@@ -2,7 +2,9 @@
   <mat-toolbar color="primary" class="example-toolbar">
     <button
       [style.display]="mobileQuery.matches ? 'initial' : 'none'"
-      mat-icon-button (click)="snav.toggle()">
+      mat-icon-button
+      (click)="snav.toggle()"
+    >
       <mat-icon>menu</mat-icon>
     </button>
     <span class="example-fill-remaining-space"></span>
@@ -11,7 +13,8 @@
 
   <mat-sidenav-container
     class="example-sidenav-container"
-    [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+  >
     <mat-sidenav
       #snav
       class="side-nav"
@@ -19,67 +22,31 @@
       opened
       [mode]="mobileQuery.matches ? 'over' : 'side'"
       [fixedInViewport]="mobileQuery.matches"
-      fixedTopGap="56">
+      fixedTopGap="56"
+    >
       <mat-nav-list>
-        <a mat-list-item routerLink="/stack-hack-to-do-task-handler" routerLinkActive="active">TASKS</a>
+        <a
+          mat-list-item
+          routerLink="/stack-hack-to-do-task-handler"
+          routerLinkActive="active"
+          >TASKS</a
+        >
         <a mat-list-item routerLink=".">CALENDAR</a>
         <a mat-list-item routerLink=".">PROFILE</a>
         <a mat-list-item routerLink=".">SETTINGS</a>
         <a mat-list-item routerLink=".">PROGRESS</a>
-        <mat-list-item>Level {{ level }} <span style = "padding-left: 40%;">{{ points_scored }}/{{ total_points }}</span></mat-list-item>
-        <mat-list-item><mat-progress-bar mode="determinate" value="40"></mat-progress-bar></mat-list-item>
+        <mat-list-item
+          >Level {{ level }}
+          <span style="padding-left: 40%;"
+            >{{ points_scored }}/{{ total_points }}</span
+          ></mat-list-item
+        >
+        <mat-list-item
+          ><mat-progress-bar mode="determinate" value="40"></mat-progress-bar
+        ></mat-list-item>
       </mat-nav-list>
     </mat-sidenav>
-    <router-outlet></router-outlet>
-
-<!--
     <mat-sidenav-content>
-      <mat-accordion class="example-headers-align">
-        <mat-expansion-panel hideToggle="true">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Add Note
-            </mat-panel-title>
-            <mat-panel-description> </mat-panel-description>
-          </mat-expansion-panel-header>
-          <mat-form-field>
-            <mat-label>Description</mat-label>
-            <input matInput [(ngModel)]="description" #desc="ngModel" />
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-label>Due Date</mat-label>
-            <input matInput [matDatepicker]="picker" [(ngModel)]="date" />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-          <button
-            mat-button
-            [disabled]="!desc.errors.minlength"
-            (click)="save()"
-          >
-            Save
-          </button>
-        </mat-expansion-panel>
-        <mat-expansion-panel *ngFor="let task of tasks" hideToggle="true">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              {{ task.description }}
-            </mat-panel-title>
-            <mat-panel-description>
-              <span *ngIf="days_between(task.dueDate, today) < 7">{{
-                task.dueDate | date: 'EEEE hh:mm a'
-              }}</span>
-              <span *ngIf="days_between(task.dueDate, today) >= 7">{{
-                task.dueDate | date: 'MMM d, h:mm a'
-              }}</span>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </mat-sidenav-content> -->
-  </mat-sidenav-container>
+      <router-outlet></router-outlet> </mat-sidenav-content
+  ></mat-sidenav-container>
 </div>

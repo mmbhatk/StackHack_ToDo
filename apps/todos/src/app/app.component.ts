@@ -1,7 +1,5 @@
 import { Component, ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { HttpClient } from '@angular/common/http';
-import { ToDo } from '@stack-hack-to-do/api-interfaces';
 
 @Component({
   selector: 'stack-hack-to-do-root',
@@ -10,16 +8,14 @@ import { ToDo } from '@stack-hack-to-do/api-interfaces';
 })
 export class AppComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
-  level: number = 5;
-  points_scored: number = 400;
-  total_points: number = 1000;
+  level = 5;
+  points_scored = 400;
+  total_points = 1000;
 
   description: string;
   date = new Date();
 
   private _mobileQueryListener: () => void;
-
-  tasks: ToDo[];
 
   today = new Date();
 
@@ -28,41 +24,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
-  ngOnInit(): void {
-    this.tasks = [
-      {
-        description: 'Greet Manu',
-        dueDate: new Date(2020, 6, 1),
-      },
-      {
-        description: 'Talk to Manu',
-        dueDate: new Date(),
-      },
-      {
-        description: 'Trouble Manu',
-        dueDate: new Date(),
-      },
-    ];
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
-  }
-
-  days_between(date1: Date, date2: Date): number {
-    // The number of milliseconds in one day
-    const ONE_DAY = 1000 * 60 * 60 * 24;
-
-    // Calculate the difference in milliseconds
-    const differenceMs = Math.abs(date1.getTime() - date2.getTime());
-
-    // Convert back to days and return
-    return Math.round(differenceMs / ONE_DAY);
-  }
-
-  save() {
-    this.tasks.push({ description: this.description, dueDate: this.date });
-    this.description = '';
-    this.date = new Date();
   }
 }

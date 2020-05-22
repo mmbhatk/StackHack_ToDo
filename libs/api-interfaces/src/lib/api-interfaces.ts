@@ -6,3 +6,8 @@ export interface ToDo {
 export interface Message {
   message: string;
 }
+
+export class CreateTodoDto {
+  readonly description: string;
+  readonly dueDate: Date;
+}
