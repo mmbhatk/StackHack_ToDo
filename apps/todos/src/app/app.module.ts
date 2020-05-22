@@ -9,10 +9,13 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
-import { TaskHandlerComponent } from './task-handler/task-handler.component';
+import {
+  TaskHandlerComponent,
+  AddNoteDialog,
+} from './task-handler/task-handler.component';
 
 @NgModule({
-  declarations: [AppComponent, TaskHandlerComponent],
+  declarations: [AppComponent, TaskHandlerComponent, AddNoteDialog],
   imports: [
     BrowserModule,
     HttpClientModule,

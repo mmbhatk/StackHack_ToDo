@@ -8,64 +8,22 @@
 <mat-tab-group>
   <mat-tab>
     <ng-template mat-tab-label>ALL</ng-template>
-    <!-- <mat-grid-list cols="4" rowHeight="1:1" gutterSize = "60">
-      <mat-grid-tile>1</mat-grid-tile>
-      <mat-grid-tile>2</mat-grid-tile>
-      <mat-grid-tile>3</mat-grid-tile>
-      <mat-grid-tile>4</mat-grid-tile>
-      <mat-grid-tile>1</mat-grid-tile>
-      <mat-grid-tile>2</mat-grid-tile>
-      <mat-grid-tile>3</mat-grid-tile>
-      <mat-grid-tile>4</mat-grid-tile>
-    </mat-grid-list> -->
-    <mat-accordion class="example-headers-align">
-      <mat-expansion-panel hideToggle="true">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Add Note
-          </mat-panel-title>
-          <mat-panel-description> </mat-panel-description>
-        </mat-expansion-panel-header>
-        <form [formGroup]="toDoForm">
-          <mat-form-field>
-            <mat-label>Description</mat-label>
-            <input matInput formControlName="description" />
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-label>Due Date</mat-label>
-            <input
-              matInput
-              [matDatepicker]="picker"
-              formControlName="dueDate"
-            />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-          <button mat-button [disabled]="toDoForm.invalid" (click)="save()">
-            Save
-          </button>
-        </form>
-      </mat-expansion-panel>
-      <mat-expansion-panel *ngFor="let task of tasks" hideToggle="true">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{ task.description }}
-          </mat-panel-title>
-          <mat-panel-description>
-            <span *ngIf="days_between(task.dueDate, today) < 7">{{
-              task.dueDate | date: 'EEEE hh:mm a'
-            }}</span>
-            <span *ngIf="days_between(task.dueDate, today) >= 7">{{
-              task.dueDate | date: 'MMM d, h:mm a'
-            }}</span>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-      </mat-expansion-panel>
-    </mat-accordion>
+    <mat-grid-list cols="7" rowHeight="1:1" gutterSize="20">
+      <button class="add-note-button" (click)="addNote()">
+        <mat-grid-tile>
+          <mat-icon>add</mat-icon>
+        </mat-grid-tile>
+      </button>
+      <mat-grid-tile *ngFor="let task of tasks" hideToggle="true">
+        {{ task.description }}
+        <span *ngIf="days_between(task.dueDate, today) < 7">{{
+          task.dueDate | date: 'EEEE hh:mm a'
+        }}</span>
+        <span *ngIf="days_between(task.dueDate, today) >= 7">{{
+          task.dueDate | date: 'MMM d, h:mm a'
+        }}</span>
+      </mat-grid-tile>
+    </mat-grid-list>
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>PRIMARY</ng-template>
@@ -77,17 +35,6 @@
   </mat-tab>
 </mat-tab-group>
 <!--
-<mat-form-field class="search-bar">
-  <mat-label>Search</mat-label>
-  <textarea matInput placeholder="Search"></textarea>
-</mat-form-field>
-
-<a href="http://google.com"><mat-icon>search</mat-icon></a>
-
-<mat-slide-toggle
-  class="darkModeButton"
-  matTooltip="Dark Mode"
-></mat-slide-toggle>
 
 <mat-tab-group>
   <mat-tab>
@@ -103,13 +50,5 @@
       <mat-grid-tile>3</mat-grid-tile>
       <mat-grid-tile>4</mat-grid-tile>
     </mat-grid-list>
-  </mat-tab>
-  <mat-tab>
-    <ng-template mat-tab-label>PRIMARY</ng-template>
-    <p>Content 2</p>
-  </mat-tab>
-  <mat-tab>
-    <ng-template mat-tab-label>WORK</ng-template>
-    <p>Content 3</p>
   </mat-tab>
 </mat-tab-group> -->

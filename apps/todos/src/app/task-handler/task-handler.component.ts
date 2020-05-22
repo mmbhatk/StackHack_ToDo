@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ToDo } from '@stack-hack-to-do/api-interfaces';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import {
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialog,
+} from '@angular/material/dialog';
 
 @Component({
   selector: 'stack-hack-to-do-task-handler',
@@ -10,10 +15,10 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 export class TaskHandlerComponent implements OnInit {
   today = new Date();
   tasks: ToDo[];
-  toDoForm: FormGroup;
+
   search: string;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.tasks = [
@@ -30,12 +35,8 @@ export class TaskHandlerComponent implements OnInit {
         dueDate: new Date(),
       },
     ];
-
-    this.toDoForm = this.formBuilder.group({
-      description: ['', Validators.required],
-      dueDate: [new Date()],
-    });
   }
+
   days_between(date1: Date, date2: Date): number {
     // The number of milliseconds in one day
     const ONE_DAY = 1000 * 60 * 60 * 24;
@@ -47,8 +48,44 @@ export class TaskHandlerComponent implements OnInit {
     return Math.round(differenceMs / ONE_DAY);
   }
 
+  addNote(): void {
+    const dialogRef = this.dialog.open(AddNoteDialog, {
+      width: '600px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      this.tasks.push(result);
+    });
+  }
+}
+
+@Component({
+  selector: 'add-note-dialog',
+  templateUrl: 'add-note-dialog.html',
+})
+export class AddNoteDialog implements OnInit {
+  toDoForm: FormGroup;
+
+  constructor(
+    public dialogRef: MatDialogRef<AddNoteDialog>,
+    @Inject(MAT_DIALOG_DATA) public data,
+    private formBuilder: FormBuilder
+  ) {}
+
+  ngOnInit(): void {
+    this.toDoForm = this.formBuilder.group({
+      description: ['', Validators.required],
+      dueDate: [new Date()],
+    });
+  }
+
+  cancel() {
+    this.dialogRef.close();
+  }
+
   save() {
-    this.tasks.push(this.toDoForm.value);
+    this.dialogRef.close(this.toDoForm.value);
     this.toDoForm.reset();
   }
 }
