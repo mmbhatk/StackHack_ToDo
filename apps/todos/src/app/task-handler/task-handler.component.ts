@@ -58,6 +58,7 @@ export class TaskHandlerComponent implements OnInit {
 @Component({
   selector: 'add-note-dialog',
   templateUrl: 'add-note-dialog.html',
+  styleUrls: ['./task-handler.component.scss']
 })
 export class AddNoteDialog implements OnInit {
   toDoForm: FormGroup;

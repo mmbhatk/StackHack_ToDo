@@ -38,8 +38,36 @@ mat-grid-list {
   margin: 10px;
 }
 
-.add-note-button {
+.add-note-card {
   &:hover {
-    opacity: 0.8;
+    opacity: 0.5;
   }
+}
+
+mat-card {
+  background-color: var(--bg-card);
+  color: var(--text);
+  width: 150px;
+  height: 150px;
+  margin: 5px;
+  display: inline-block !important
+}
+
+.cards-container {
+  display: flex;
+}
+
+.add-icon-container {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.add-icon {
+  padding-left: calc(50% - 50px);
+  padding-top: calc(50% - 50px);
+}
+
+.add-icon > mat-icon {
+  font-size: 100px;
 }

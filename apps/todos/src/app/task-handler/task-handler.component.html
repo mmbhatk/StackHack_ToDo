@@ -8,22 +8,23 @@
 <mat-tab-group>
   <mat-tab>
     <ng-template mat-tab-label>ALL</ng-template>
-    <mat-grid-list cols="7" rowHeight="1:1" gutterSize="20">
-      <button class="add-note-button" (click)="addNote()">
-        <mat-grid-tile>
-          <mat-icon>add</mat-icon>
-        </mat-grid-tile>
-      </button>
-      <mat-grid-tile *ngFor="let task of tasks" hideToggle="true">
-        {{ task.description }}
-        <span *ngIf="days_between(task.dueDate, today) < 7">{{
+    <div class="cards-container">
+       <mat-card class="add-note-card" (click)="addNote()">
+          <div class="add-icon-container"><div class="add-icon"><mat-icon>add</mat-icon></div></div>
+        </mat-card>
+      <mat-card *ngFor="let task of tasks">
+        <div>
+        <h2>{{ task.description }}</h2>
+        <p *ngIf="days_between(task.dueDate, today) < 7">{{
           task.dueDate | date: 'EEEE hh:mm a'
-        }}</span>
-        <span *ngIf="days_between(task.dueDate, today) >= 7">{{
+        }}</p>
+        <p *ngIf="days_between(task.dueDate, today) >= 7">{{
           task.dueDate | date: 'MMM d, h:mm a'
-        }}</span>
-      </mat-grid-tile>
-    </mat-grid-list>
+        }}</p>
+        </div>
+      </mat-card>
+    </div>
+
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>PRIMARY</ng-template>

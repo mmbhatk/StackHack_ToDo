@@ -1,4 +1,4 @@
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+<div class="example-container" [class.light]="!darkMode" [class.dark]="darkMode" [class.example-is-mobile]="mobileQuery.matches">
   <mat-toolbar color="primary" class="example-toolbar">
     <button
       [style.display]="mobileQuery.matches ? 'initial' : 'none'"
@@ -12,6 +12,7 @@
     <mat-slide-toggle
       class="darkModeButton"
       matTooltip="Dark Mode"
+      [(ngModel)]="darkMode"
     ></mat-slide-toggle>
   </mat-toolbar>
 

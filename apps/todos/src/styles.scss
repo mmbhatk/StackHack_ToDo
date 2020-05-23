@@ -1,6 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; color:var(--text); background: var(--bg);
+transition: background 500ms ease-in-out, color 1000ms ease-in-out;}
 
 @import url('https://fonts.googleapis.com/css2?family=Alegreya&family=Alegreya+Sans&family=Merriweather&family=Merriweather+Sans&family=Nunito&family=Nunito+Sans&family=Quattrocento&family=Quattrocento+Sans&family=Roboto&family=Roboto+Mono&family=Roboto+Slab&display=swap');
+
+:root {
+  --dark-bg: #272727;
+  --dark-blue-bg: #3A0CA3;
+  --light-nav-blue: #3f51b5;
+  --light-blue-bg: #41b0ff;
+}
+
+.light {
+  --bg: '#eeeeee';
+  --bg-side-nav: var(--light-blue-bg);
+  --text: #000000;
+  --bg-card:  #F1ECCE;
+}
+
+.dark {
+  --bg: var(--dark-bg);
+  --bg-side-nav: var(--dark-blue-bg);
+  --text: #ffffff;
+  --bg-card:#455a64;
+}

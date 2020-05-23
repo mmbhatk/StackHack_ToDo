@@ -12,6 +12,8 @@ export class AppComponent implements OnInit, OnDestroy {
   points_scored = 400;
   total_points = 1000;
 
+  darkMode= false;
+
   description: string;
   date = new Date();
 
