@@ -7,8 +7,11 @@ import { Observable } from 'rxjs';
 export class DashboardService {
   constructor(private httpClient: HttpClient) {}
 
-  getTasks(): Observable<ToDo[]> {
-    return this.httpClient.get<ToDo[]>('./api/tasks/Personal');
+  getTasks(label: string): Observable<ToDo[]> {
+    return this.httpClient.post<ToDo[]>('./api/tasks/get', {
+      label,
+      userid: '044021',
+    });
   }
 
   postTask(label, task) {
@@ -24,6 +27,7 @@ export class DashboardService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       body: { userid: '044021', label },
     };
-    return this.httpClient.delete(`./api/tasks/${task._id}`, httpOptions);
+    console.log(task);
+    return this.httpClient.delete(`./api/tasks/${task.id}`, httpOptions);
   }
 }

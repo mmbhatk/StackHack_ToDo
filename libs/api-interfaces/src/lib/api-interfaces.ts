@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 
 export interface ToDo extends mongoose.Document {
-  _id: any;
+  id: any;
   description: string;
   dueDate: Date;
 }

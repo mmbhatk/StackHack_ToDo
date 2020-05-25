@@ -19,7 +19,7 @@ export class TasksController {
   }
 
   @Post('/get')
-  async findAll(@Body('label') label, @Body('userid') userid): Promise<Task[]> {
+  async findAll(@Body('label') label, @Body('userid') userid): Promise<ToDo[]> {
     return this.tasksService.findAll(userid, label);
   }
 

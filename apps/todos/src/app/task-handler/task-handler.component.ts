@@ -25,7 +25,9 @@ export class TaskHandlerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.dashboardService.getTasks().subscribe((tasks) => (this.tasks = tasks));
+    this.dashboardService
+      .getTasks('Personal')
+      .subscribe((tasks) => (this.tasks = tasks));
   }
 
   days_between(date1: Date, date2: Date): number {
@@ -64,7 +66,7 @@ export class TaskHandlerComponent implements OnInit {
       if (result)
         this.dashboardService.delete('Personal', task).subscribe((response) => {
           if (response['ok'] === 1)
-            this.tasks = this.tasks.filter((_task) => _task._id !== task._id);
+            this.tasks = this.tasks.filter((_task) => _task.id !== task.id);
         });
     });
   }
