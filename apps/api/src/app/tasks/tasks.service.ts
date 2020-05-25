@@ -1,26 +1,45 @@
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Task } from './schemas/tasks.schema';
-import { CreateTodoDto } from './dto/create-todo.dto';
+import { Task, Todo } from './schemas/tasks.schema';
 import { ToDo } from '@stack-hack-to-do/api-interfaces';
 
 @Injectable()
 export class TasksService {
   constructor(
-    @InjectModel(Task.name) private readonly taskModel: Model<ToDo>
+    @InjectModel(Todo.name) private readonly taskModel: Model<Todo>
   ) {}
 
-  async create(createTodoDto: CreateTodoDto): Promise<ToDo> {
-    const createdTodo = new this.taskModel(createTodoDto);
-    return createdTodo.save();
+  async create(userid: string, label: string, task: Task): Promise<any> {
+    const taskWithId = {
+      ...task,
+      id: new Types.ObjectId(),
+    };
+    const user = await this.taskModel.updateOne(
+      { userid: userid, 'labels.lname': label },
+      {
+        $push: {
+          'labels.$.tasks': taskWithId,
+        },
+      }
+    );
+    if (user.ok === 1) return taskWithId;
+    return {};
   }
 
-  async findAll(): Promise<ToDo[]> {
-    return this.taskModel.find().exec();
+  async findAll(userid, label): Promise<any> {
+    const user = await this.taskModel.findOne({ userid });
+    return user.labels.find((lab) => lab.lname === label).tasks;
   }
 
-  async delete(id): Promise<any> {
-    return this.taskModel.deleteOne({ _id: id }, (err) => err);
+  async delete(userid, label, id): Promise<any> {
+    return this.taskModel.updateOne(
+      { userid: userid, 'labels.lname': label },
+      {
+        $pull: {
+          'labels.$.tasks': { id: new Types.ObjectId(id) },
+        },
+      }
+    );
   }
 }

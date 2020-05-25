@@ -49,7 +49,7 @@ export class TaskHandlerComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result)
         this.dashboardService
-          .postTask(result)
+          .postTask('Personal', result)
           .subscribe((response: ToDo) => this.tasks.push(response));
     });
   }
@@ -62,7 +62,7 @@ export class TaskHandlerComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result)
-        this.dashboardService.delete(task).subscribe((response) => {
+        this.dashboardService.delete('Personal', task).subscribe((response) => {
           if (response['ok'] === 1)
             this.tasks = this.tasks.filter((_task) => _task._id !== task._id);
         });
