@@ -1,4 +1,7 @@
-export interface ToDo {
+import * as mongoose from 'mongoose';
+
+export interface ToDo extends mongoose.Document {
+  _id: any;
   description: string;
   dueDate: Date;
 }

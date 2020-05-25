@@ -14,4 +14,8 @@ export class DashboardService {
   postTask(task) {
     return this.httpClient.post('./api/tasks', task);
   }
+
+  delete(task: ToDo) {
+    return this.httpClient.delete(`./api/tasks/${task._id}`);
+  }
 }

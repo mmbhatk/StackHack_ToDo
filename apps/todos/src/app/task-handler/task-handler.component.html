@@ -9,22 +9,30 @@
   <mat-tab>
     <ng-template mat-tab-label>ALL</ng-template>
     <div class="cards-container">
-       <mat-card class="add-note-card" (click)="addNote()">
-          <div class="add-icon-container"><div class="add-icon"><mat-icon>add</mat-icon></div></div>
-        </mat-card>
+      <mat-card class="add-note-card" (click)="addNote()">
+        <div class="add-icon-container">
+          <div class="add-icon"><mat-icon>add</mat-icon></div>
+        </div>
+      </mat-card>
       <mat-card *ngFor="let task of tasks">
         <div>
-        <h2>{{ task.description }}</h2>
-        <p *ngIf="days_between(task.dueDate, today) < 7">{{
-          task.dueDate | date: 'EEEE hh:mm a'
-        }}</p>
-        <p *ngIf="days_between(task.dueDate, today) >= 7">{{
-          task.dueDate | date: 'MMM d, h:mm a'
-        }}</p>
+          <mat-card-title>{{ task.description }}</mat-card-title>
+          <mat-card-content>
+            <p *ngIf="days_between(task.dueDate, today) < 7">
+              {{ task.dueDate | date: 'EEEE hh:mm a' }}
+            </p>
+            <p *ngIf="days_between(task.dueDate, today) >= 7">
+              {{ task.dueDate | date: 'MMM d, h:mm a' }}
+            </p></mat-card-content
+          >
+          <mat-card-actions>
+            <button mat-icon-button (click)="deleteTask(task)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-actions>
         </div>
       </mat-card>
     </div>
-
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>PRIMARY</ng-template>

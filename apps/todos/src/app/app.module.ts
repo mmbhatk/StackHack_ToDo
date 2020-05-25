@@ -12,10 +12,16 @@ import { AppRoutingModule } from './app-routing.module';
 import {
   TaskHandlerComponent,
   AddNoteDialog,
+  DeleteNoteDialog,
 } from './task-handler/task-handler.component';
 
 @NgModule({
-  declarations: [AppComponent, TaskHandlerComponent, AddNoteDialog],
+  declarations: [
+    AppComponent,
+    TaskHandlerComponent,
+    AddNoteDialog,
+    DeleteNoteDialog,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,

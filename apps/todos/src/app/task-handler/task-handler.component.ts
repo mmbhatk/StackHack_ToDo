@@ -53,12 +53,26 @@ export class TaskHandlerComponent implements OnInit {
           .subscribe((response: ToDo) => this.tasks.push(response));
     });
   }
+
+  deleteTask(task: ToDo) {
+    const dialogRef = this.dialog.open(DeleteNoteDialog, {
+      width: '400px',
+      data: task,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result)
+        this.dashboardService.delete(task).subscribe((response) => {
+          if (response['ok'] === 1)
+            this.tasks = this.tasks.filter((_task) => _task._id !== task._id);
+        });
+    });
+  }
 }
 
 @Component({
-  selector: 'add-note-dialog',
-  templateUrl: 'add-note-dialog.html',
-  styleUrls: ['./task-handler.component.scss']
+  templateUrl: 'add-task-dialog.html',
+  styleUrls: ['./task-handler.component.scss'],
 })
 export class AddNoteDialog implements OnInit {
   toDoForm: FormGroup;
@@ -83,5 +97,24 @@ export class AddNoteDialog implements OnInit {
   save() {
     this.dialogRef.close(this.toDoForm.value);
     this.toDoForm.reset();
+  }
+}
+
+@Component({
+  templateUrl: 'delete-task-dialog.html',
+  styleUrls: ['./task-handler.component.scss'],
+})
+export class DeleteNoteDialog {
+  constructor(
+    public dialogRef: MatDialogRef<DeleteNoteDialog>,
+    @Inject(MAT_DIALOG_DATA) public task
+  ) {}
+
+  cancel() {
+    this.dialogRef.close(false);
+  }
+
+  confirm() {
+    this.dialogRef.close(true);
   }
 }

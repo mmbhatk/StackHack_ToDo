@@ -1,28 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; color:var(--text); background: var(--bg);
-transition: background 500ms ease-in-out, color 1000ms ease-in-out;}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  transition: background 500ms ease-in-out, color 1000ms ease-in-out;
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Alegreya&family=Alegreya+Sans&family=Merriweather&family=Merriweather+Sans&family=Nunito&family=Nunito+Sans&family=Quattrocento&family=Quattrocento+Sans&family=Roboto&family=Roboto+Mono&family=Roboto+Slab&display=swap');
 
-:root {
-  --dark-bg: #272727;
-  --dark-blue-bg: #3A0CA3;
-  --light-nav-blue: #3f51b5;
-  --light-blue-bg: #41b0ff;
-}
+@import '~@angular/material/theming';
+@include mat-core();
+
+$my-light-primary: mat-palette($mat-deep-purple);
+$my-light-accent: mat-palette($mat-pink, 100, 500, A100);
+$my-light-warn: mat-palette($mat-lime);
+
+$my-dark-primary: mat-palette($mat-blue-grey);
+$my-dark-accent: mat-palette($mat-amber, A200, A100, A400);
+$my-dark-warn: mat-palette($mat-deep-orange);
+
+$my-dark-theme: mat-dark-theme(
+  $my-dark-primary,
+  $my-dark-accent,
+  $my-dark-warn
+);
+
+$my-light-theme: mat-light-theme(
+  $my-light-primary,
+  $my-light-accent,
+  $my-light-warn
+);
 
 .light {
-  --bg: '#eeeeee';
-  --bg-side-nav: var(--light-blue-bg);
-  --text: #000000;
-  --bg-card:  #F1ECCE;
+  @include angular-material-theme($my-light-theme);
 }
 
 .dark {
-  --bg: var(--dark-bg);
-  --bg-side-nav: var(--dark-blue-bg);
-  --text: #ffffff;
-  --bg-card:#455a64;
+  @include angular-material-theme($my-dark-theme);
 }
