@@ -7,6 +7,7 @@ import {
   MatDialog,
 } from '@angular/material/dialog';
 import { DashboardService } from './task-handler.service';
+import * as Moment from 'moment';
 
 @Component({
   selector: 'stack-hack-to-do-task-handler',
@@ -41,16 +42,7 @@ export class TaskHandlerComponent implements OnInit {
   }
 
   days_between(date1: Date, date2: Date): number {
-    // The number of milliseconds in one day
-    const ONE_DAY = 1000 * 60 * 60 * 24;
-
-    let differenceMs = 0;
-    if (date1 instanceof Date && date2 instanceof Date)
-      // Calculate the difference in milliseconds
-      differenceMs = Math.abs(date1.getTime() - date2.getTime());
-
-    // Convert back to days and return
-    return Math.round(differenceMs / ONE_DAY);
+    return Moment(date1).diff(Moment(date2));
   }
 
   addNote(): void {
@@ -62,9 +54,10 @@ export class TaskHandlerComponent implements OnInit {
       if (result)
         this.dashboardService
           .postTask(this.tabs[this.selectedTab], result)
-          .subscribe((response: ToDo) =>
-            this.tasksMap[this.tabs[this.selectedTab]].push(response)
-          );
+          .subscribe((response: ToDo) => {
+            this.tasksMap[this.tabs[this.selectedTab]].push(response);
+            this.filter(this.search);
+          });
     });
   }
 
