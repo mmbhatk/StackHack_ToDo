@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Delete, Param } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Delete,
+  Param,
+  Query,
+} from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { ToDo } from '@stack-hack-to-do/api-interfaces';
@@ -18,8 +26,11 @@ export class TasksController {
     return response;
   }
 
-  @Post('/get')
-  async findAll(@Body('label') label, @Body('userid') userid): Promise<ToDo[]> {
+  @Get()
+  async findAll(
+    @Query('label') label,
+    @Query('userid') userid
+  ): Promise<ToDo[]> {
     return this.tasksService.findAll(userid, label);
   }
 

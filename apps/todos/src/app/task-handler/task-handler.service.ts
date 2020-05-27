@@ -8,9 +8,11 @@ export class DashboardService {
   constructor(private httpClient: HttpClient) {}
 
   getTasks(label: string): Observable<ToDo[]> {
-    return this.httpClient.post<ToDo[]>('./api/tasks/get', {
-      label,
-      userid: '044021',
+    return this.httpClient.get<ToDo[]>('./api/tasks', {
+      params: {
+        label,
+        userid: '044021',
+      },
     });
   }
 
