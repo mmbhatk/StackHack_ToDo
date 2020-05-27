@@ -15,9 +15,14 @@ import { DashboardService } from './task-handler.service';
 })
 export class TaskHandlerComponent implements OnInit {
   today = new Date();
-  tasks: ToDo[];
 
-  search: string;
+  selectedTab = 1;
+
+  tabs = ['All', 'Personal', 'Work'];
+
+  tasksMap = { Personal: [], Work: [], filtered: {} };
+
+  search = '';
 
   constructor(
     public dialog: MatDialog,
@@ -25,9 +30,14 @@ export class TaskHandlerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.dashboardService
-      .getTasks('Personal')
-      .subscribe((tasks) => (this.tasks = tasks));
+    this.dashboardService.getTasks('Personal').subscribe((tasks) => {
+      this.tasksMap['Personal'] = tasks;
+      this.filter(this.search);
+    });
+    this.dashboardService.getTasks('Work').subscribe((tasks) => {
+      this.tasksMap['Work'] = tasks;
+      this.filter(this.search);
+    });
   }
 
   days_between(date1: Date, date2: Date): number {
@@ -51,8 +61,10 @@ export class TaskHandlerComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result)
         this.dashboardService
-          .postTask('Personal', result)
-          .subscribe((response: ToDo) => this.tasks.push(response));
+          .postTask(this.tabs[this.selectedTab], result)
+          .subscribe((response: ToDo) =>
+            this.tasksMap[this.tabs[this.selectedTab]].push(response)
+          );
     });
   }
 
@@ -64,11 +76,25 @@ export class TaskHandlerComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result)
-        this.dashboardService.delete('Personal', task).subscribe((response) => {
-          if (response['ok'] === 1)
-            this.tasks = this.tasks.filter((_task) => _task.id !== task.id);
-        });
+        this.dashboardService
+          .delete(this.tabs[this.selectedTab], task)
+          .subscribe((response) => {
+            if (response['ok'] === 1)
+              this.tasksMap[this.tabs[this.selectedTab]] = this.tasksMap[
+                this.tabs[this.selectedTab]
+              ].filter((_task) => _task.id !== task.id);
+          });
     });
+  }
+
+  filter(event) {
+    this.search = event;
+    this.tasksMap['filtered']['Personal'] = this.tasksMap[
+      'Personal'
+    ].filter((o: ToDo) => o.description.includes(this.search));
+    this.tasksMap['filtered']['Work'] = this.tasksMap[
+      'Work'
+    ].filter((o: ToDo) => o.description.includes(this.search));
   }
 }
 

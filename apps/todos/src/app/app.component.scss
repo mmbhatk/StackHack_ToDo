@@ -51,14 +51,6 @@
   }
 }
 
-mat-sidenav {
-  background-color: var(--bg-side-nav);
-}
-
 mat-sidenav-content {
-  background: var(--bg);
-}
-
-.mat-list-base .mat-list-item {
-  color: var(--text);
+  margin-top: 5px;
 }

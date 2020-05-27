@@ -17,6 +17,10 @@ export class UsersService {
           lname: 'Personal',
           tasks: [],
         },
+        {
+          lname: 'Work',
+          tasks: [],
+        },
       ],
     });
     return createdTodo.save();

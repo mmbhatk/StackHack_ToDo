@@ -1,46 +1,104 @@
 <mat-form-field class="search-bar">
   <mat-label>Search</mat-label>
-  <input matInput [(ngModel)]="search" />
+  <input matInput [ngModel]="search" (ngModelChange)="filter($event)" />
 </mat-form-field>
 
-<a href="http://google.com"><mat-icon>search</mat-icon></a>
+<mat-icon>search</mat-icon>
 
-<mat-tab-group>
+<mat-tab-group [(selectedIndex)]="selectedTab">
   <mat-tab>
     <ng-template mat-tab-label>ALL</ng-template>
+    <div class="cards-container">
+      <!-- <mat-card class="add-note-card" (click)="addNote()">
+        <div class="add-icon-container">
+          <div class="add-icon"><mat-icon>add</mat-icon></div>
+        </div>
+      </mat-card> -->
+      <mat-card *ngFor="let task of tasksMap['filtered']['Personal']">
+        <mat-card-title>{{ task.description }}</mat-card-title>
+        <mat-card-content>
+          <p *ngIf="days_between(task.dueDate, today) < 7">
+            {{ task.dueDate | date: 'EEEE hh:mm a' }}
+          </p>
+          <p *ngIf="days_between(task.dueDate, today) >= 7">
+            {{ task.dueDate | date: 'MMM d, h:mm a' }}
+          </p></mat-card-content
+        >
+        <!-- <mat-card-actions>
+            <button mat-icon-button (click)="deleteTask(task)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-actions> -->
+      </mat-card>
+      <mat-card *ngFor="let task of tasksMap['filtered']['Work']">
+        <mat-card-title>{{ task.description }}</mat-card-title>
+        <mat-card-content>
+          <p *ngIf="days_between(task.dueDate, today) < 7">
+            {{ task.dueDate | date: 'EEEE hh:mm a' }}
+          </p>
+          <p *ngIf="days_between(task.dueDate, today) >= 7">
+            {{ task.dueDate | date: 'MMM d, h:mm a' }}
+          </p></mat-card-content
+        >
+        <!-- <mat-card-actions>
+            <button mat-icon-button (click)="deleteTask(task)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-actions> -->
+      </mat-card>
+    </div>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>PERSONAL</ng-template>
     <div class="cards-container">
       <mat-card class="add-note-card" (click)="addNote()">
         <div class="add-icon-container">
           <div class="add-icon"><mat-icon>add</mat-icon></div>
         </div>
       </mat-card>
-      <mat-card *ngFor="let task of tasks">
-        <div>
-          <mat-card-title>{{ task.description }}</mat-card-title>
-          <mat-card-content>
-            <p *ngIf="days_between(task.dueDate, today) < 7">
-              {{ task.dueDate | date: 'EEEE hh:mm a' }}
-            </p>
-            <p *ngIf="days_between(task.dueDate, today) >= 7">
-              {{ task.dueDate | date: 'MMM d, h:mm a' }}
-            </p></mat-card-content
-          >
-          <mat-card-actions>
-            <button mat-icon-button (click)="deleteTask(task)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </mat-card-actions>
-        </div>
+      <mat-card *ngFor="let task of tasksMap['filtered']['Personal']">
+        <mat-card-title>{{ task.description }}</mat-card-title>
+        <mat-card-content>
+          <p *ngIf="days_between(task.dueDate, today) < 7">
+            {{ task.dueDate | date: 'EEEE hh:mm a' }}
+          </p>
+          <p *ngIf="days_between(task.dueDate, today) >= 7">
+            {{ task.dueDate | date: 'MMM d, h:mm a' }}
+          </p></mat-card-content
+        >
+        <mat-card-actions>
+          <button mat-icon-button (click)="deleteTask(task)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
       </mat-card>
     </div>
   </mat-tab>
   <mat-tab>
-    <ng-template mat-tab-label>PRIMARY</ng-template>
-    <p>Content 2</p>
-  </mat-tab>
-  <mat-tab>
     <ng-template mat-tab-label>WORK</ng-template>
-    <p>Content 3</p>
+    <div class="cards-container">
+      <mat-card class="add-note-card" (click)="addNote()">
+        <div class="add-icon-container">
+          <div class="add-icon"><mat-icon>add</mat-icon></div>
+        </div>
+      </mat-card>
+      <mat-card *ngFor="let task of tasksMap['filtered']['Work']">
+        <mat-card-title>{{ task.description }}</mat-card-title>
+        <mat-card-content>
+          <p *ngIf="days_between(task.dueDate, today) < 7">
+            {{ task.dueDate | date: 'EEEE hh:mm a' }}
+          </p>
+          <p *ngIf="days_between(task.dueDate, today) >= 7">
+            {{ task.dueDate | date: 'MMM d, h:mm a' }}
+          </p></mat-card-content
+        >
+        <mat-card-actions>
+          <button mat-icon-button (click)="deleteTask(task)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
   </mat-tab>
 </mat-tab-group>
 <!--
