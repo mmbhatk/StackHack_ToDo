@@ -76,6 +76,7 @@ export class TaskHandlerComponent implements OnInit {
               this.tasksMap[this.tabs[this.selectedTab]] = this.tasksMap[
                 this.tabs[this.selectedTab]
               ].filter((_task) => _task.id !== task.id);
+            this.filter('');
           });
     });
   }
