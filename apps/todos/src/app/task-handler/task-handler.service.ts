@@ -29,7 +29,6 @@ export class DashboardService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       body: { userid: '044021', label },
     };
-    console.log(task);
     return this.httpClient.delete(`./api/tasks/${task.id}`, httpOptions);
   }
 }

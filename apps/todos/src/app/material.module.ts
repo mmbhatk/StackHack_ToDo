@@ -17,6 +17,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [
@@ -37,6 +40,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatProgressBarModule,
     MatGridListModule,
     MatDialogModule,
+    MatSliderModule,
+    MatCheckboxModule,
+    MatSnackBarModule,
   ],
   exports: [
     MatToolbarModule,
@@ -56,6 +62,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatProgressBarModule,
     MatGridListModule,
     MatDialogModule,
+    MatSliderModule,
+    MatCheckboxModule,
+    MatSnackBarModule,
   ],
 })
 export class MaterialModule {}

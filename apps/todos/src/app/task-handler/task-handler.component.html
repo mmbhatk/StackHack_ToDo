@@ -24,6 +24,8 @@
             {{ task.dueDate | date: 'MMM d, h:mm a' }}
           </p></mat-card-content
         >
+        <span>{{ task.points }} points</span>
+
         <!-- <mat-card-actions>
             <button mat-icon-button (click)="deleteTask(task)">
               <mat-icon>delete</mat-icon>
@@ -66,10 +68,19 @@
             {{ task.dueDate | date: 'MMM d, h:mm a' }}
           </p></mat-card-content
         >
+        <span>{{ task.points }} points</span>
+
         <mat-card-actions>
-          <button mat-icon-button (click)="deleteTask(task)">
-            <mat-icon>delete</mat-icon>
-          </button>
+          <div class="flex-action">
+            <mat-checkbox
+              title="Complete Task"
+              class="checkbox"
+              (click)="completeTask(task)"
+            ></mat-checkbox>
+            <button mat-icon-button (click)="deleteTask(task)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </mat-card-actions>
       </mat-card>
     </div>
@@ -92,6 +103,7 @@
             {{ task.dueDate | date: 'MMM d, h:mm a' }}
           </p></mat-card-content
         >
+        <span>{{ task.points }} points</span>
         <mat-card-actions>
           <button mat-icon-button (click)="deleteTask(task)">
             <mat-icon>delete</mat-icon>
@@ -99,6 +111,13 @@
         </mat-card-actions>
       </mat-card>
     </div>
+  </mat-tab>
+  <mat-tab disabled="true">
+    <ng-template mat-tab-label
+      ><button mat-icon-button>
+        <mat-icon title="add label">add</mat-icon>
+      </button></ng-template
+    >
   </mat-tab>
 </mat-tab-group>
 <!--
