@@ -1,4 +1,9 @@
-<div class="example-container" [class.light]="!darkMode" [class.dark]="darkMode" [class.example-is-mobile]="mobileQuery.matches">
+<div
+  class="example-container"
+  [class.light]="!darkMode"
+  [class.dark]="darkMode"
+  [class.example-is-mobile]="mobileQuery.matches"
+>
   <mat-toolbar color="primary" class="example-toolbar">
     <button
       [style.display]="mobileQuery.matches ? 'initial' : 'none'"
@@ -30,18 +35,10 @@
       fixedTopGap="56"
     >
       <mat-nav-list>
-        <a
-          mat-list-item
-          routerLink="/dashboard"
-          routerLinkActive="active"
+        <a mat-list-item routerLink="/dashboard" routerLinkActive="active"
           >TASKS</a
         >
-        <a
-          mat-list-item
-          routerLink="/calendar"
-          routerLinkActive="active"
-          >CALENDAR</a
-        >
+
         <a mat-list-item routerLink=".">PROFILE</a>
         <a mat-list-item routerLink=".">SETTINGS</a>
         <a mat-list-item routerLink=".">PROGRESS</a>
@@ -52,7 +49,10 @@
           ></mat-list-item
         >
         <mat-list-item
-          ><mat-progress-bar mode="determinate" value="40"></mat-progress-bar
+          ><mat-progress-bar
+            mode="determinate"
+            [value]="points_scored"
+          ></mat-progress-bar
         ></mat-list-item>
       </mat-nav-list>
     </mat-sidenav>

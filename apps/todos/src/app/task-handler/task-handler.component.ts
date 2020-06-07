@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { ToDo } from '@stack-hack-to-do/api-interfaces';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import {
@@ -8,6 +8,8 @@ import {
 } from '@angular/material/dialog';
 import { DashboardService } from './task-handler.service';
 import * as Moment from 'moment';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { PointsService } from '../app.service';
 
 @Component({
   selector: 'stack-hack-to-do-task-handler',
@@ -16,7 +18,6 @@ import * as Moment from 'moment';
 })
 export class TaskHandlerComponent implements OnInit {
   today = new Date();
-
   selectedTab = 1;
 
   tabs = ['All', 'Personal', 'Work'];
@@ -27,7 +28,9 @@ export class TaskHandlerComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private _snackBar: MatSnackBar,
+    private taskCompleter: PointsService
   ) {}
 
   ngOnInit(): void {
@@ -76,6 +79,7 @@ export class TaskHandlerComponent implements OnInit {
               this.tasksMap[this.tabs[this.selectedTab]] = this.tasksMap[
                 this.tabs[this.selectedTab]
               ].filter((_task) => _task.id !== task.id);
+            this.filter('');
           });
     });
   }
@@ -88,6 +92,26 @@ export class TaskHandlerComponent implements OnInit {
     this.tasksMap['filtered']['Work'] = this.tasksMap[
       'Work'
     ].filter((o: ToDo) => o.description.includes(this.search));
+  }
+
+  completeTask(task) {
+    this._snackBar.open(
+      `You completed the task: ${task.description}`,
+      `+${task.points} points!`,
+      {
+        duration: 3000,
+      }
+    );
+    this.dashboardService
+      .delete(this.tabs[this.selectedTab], task)
+      .subscribe((response) => {
+        if (response['ok'] === 1)
+          this.tasksMap[this.tabs[this.selectedTab]] = this.tasksMap[
+            this.tabs[this.selectedTab]
+          ].filter((_task) => _task.id !== task.id);
+        this.filter('');
+      });
+    this.taskCompleter.next(task.points);
   }
 }
 
@@ -105,9 +129,13 @@ export class AddNoteDialog implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
     this.toDoForm = this.formBuilder.group({
       description: ['', Validators.required],
-      dueDate: [new Date()],
+      dueDate: [today],
+      time: '08:00',
+      points: [3],
     });
   }
 
@@ -116,7 +144,14 @@ export class AddNoteDialog implements OnInit {
   }
 
   save() {
-    this.dialogRef.close(this.toDoForm.value);
+    const time = this.toDoForm.value.time.split(':');
+    const timeMinutes = +time[0] * 60 + +time[1];
+    console.log(timeMinutes);
+    this.dialogRef.close({
+      description: this.toDoForm.value.description,
+      dueDate: Moment(this.toDoForm.value.dueDate).add(timeMinutes, 'minutes'),
+      points: this.toDoForm.value.points,
+    });
     this.toDoForm.reset();
   }
 }
