@@ -8,6 +8,7 @@ import {
 } from '@angular/material/dialog';
 import { DashboardService } from './task-handler.service';
 import * as Moment from 'moment';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'stack-hack-to-do-task-handler',
@@ -16,7 +17,6 @@ import * as Moment from 'moment';
 })
 export class TaskHandlerComponent implements OnInit {
   today = new Date();
-
   selectedTab = 1;
 
   tabs = ['All', 'Personal', 'Work'];
@@ -27,7 +27,8 @@ export class TaskHandlerComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -89,6 +90,21 @@ export class TaskHandlerComponent implements OnInit {
     this.tasksMap['filtered']['Work'] = this.tasksMap[
       'Work'
     ].filter((o: ToDo) => o.description.includes(this.search));
+  }
+
+  completeTask(task) {
+    this._snackBar.open(`You completed the task: ${task.description}`, 'Done', {
+      duration: 3000,
+    });
+    this.dashboardService
+      .delete(this.tabs[this.selectedTab], task)
+      .subscribe((response) => {
+        if (response['ok'] === 1)
+          this.tasksMap[this.tabs[this.selectedTab]] = this.tasksMap[
+            this.tabs[this.selectedTab]
+          ].filter((_task) => _task.id !== task.id);
+        this.filter('');
+      });
   }
 }
 

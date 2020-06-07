@@ -71,9 +71,16 @@
         <span>{{ task.points }} points</span>
 
         <mat-card-actions>
-          <button mat-icon-button (click)="deleteTask(task)">
-            <mat-icon>delete</mat-icon>
-          </button>
+          <div class="flex-action">
+            <mat-checkbox
+              title="Complete Task"
+              class="checkbox"
+              (click)="completeTask(task)"
+            ></mat-checkbox>
+            <button mat-icon-button (click)="deleteTask(task)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </mat-card-actions>
       </mat-card>
     </div>
