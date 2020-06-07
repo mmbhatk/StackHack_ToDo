@@ -7,6 +7,8 @@ export class Task extends Document {
   name: string;
   @Prop()
   dueDate: Date;
+  @Prop()
+  points: number;
 }
 
 @Schema()
@@ -30,12 +32,6 @@ export class Todo extends Document {
 
   @Prop()
   labels: Label[];
-
-  @Prop()
-  description: string;
-
-  @Prop()
-  dueDate: Date;
 }
 
 export const TodoSchema = SchemaFactory.createForClass(Todo);
