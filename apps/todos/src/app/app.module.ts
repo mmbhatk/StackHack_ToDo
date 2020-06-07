@@ -14,7 +14,6 @@ import {
   AddNoteDialog,
   DeleteNoteDialog,
 } from './task-handler/task-handler.component';
-import { CalenderComponent } from './calender/calender.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,6 @@ import { CalenderComponent } from './calender/calender.component';
     TaskHandlerComponent,
     AddNoteDialog,
     DeleteNoteDialog,
-    CalenderComponent,
   ],
   imports: [
     BrowserModule,
