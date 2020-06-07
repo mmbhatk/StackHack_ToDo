@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { ToDo } from '@stack-hack-to-do/api-interfaces';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import {
@@ -9,6 +9,7 @@ import {
 import { DashboardService } from './task-handler.service';
 import * as Moment from 'moment';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PointsService } from '../app.service';
 
 @Component({
   selector: 'stack-hack-to-do-task-handler',
@@ -28,7 +29,8 @@ export class TaskHandlerComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private dashboardService: DashboardService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private taskCompleter: PointsService
   ) {}
 
   ngOnInit(): void {
@@ -93,9 +95,13 @@ export class TaskHandlerComponent implements OnInit {
   }
 
   completeTask(task) {
-    this._snackBar.open(`You completed the task: ${task.description}`, 'Done', {
-      duration: 3000,
-    });
+    this._snackBar.open(
+      `You completed the task: ${task.description}`,
+      `+${task.points} points!`,
+      {
+        duration: 3000,
+      }
+    );
     this.dashboardService
       .delete(this.tabs[this.selectedTab], task)
       .subscribe((response) => {
@@ -105,6 +111,7 @@ export class TaskHandlerComponent implements OnInit {
           ].filter((_task) => _task.id !== task.id);
         this.filter('');
       });
+    this.taskCompleter.next(task.points);
   }
 }
 
