@@ -109,6 +109,7 @@ export class AddNoteDialog implements OnInit {
     this.toDoForm = this.formBuilder.group({
       description: ['', Validators.required],
       dueDate: [new Date()],
+      points: [3],
     });
   }
 

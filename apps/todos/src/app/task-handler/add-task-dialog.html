@@ -13,6 +13,18 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+    <br />
+    <span>points: {{toDoForm.value.points}} </span>
+
+    <mat-slider
+      class="example-margin"
+      [max]="5"
+      [min]="1"
+      [step]="1"
+      [thumbLabel]="true"
+      formControlName="points"
+    >
+    </mat-slider>
   </form>
 </div>
 <div mat-dialog-actions>
