@@ -122,9 +122,12 @@ export class AddNoteDialog implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
     this.toDoForm = this.formBuilder.group({
       description: ['', Validators.required],
-      dueDate: [new Date()],
+      dueDate: [today],
+      time: '08:00',
       points: [3],
     });
   }
@@ -134,7 +137,14 @@ export class AddNoteDialog implements OnInit {
   }
 
   save() {
-    this.dialogRef.close(this.toDoForm.value);
+    const time = this.toDoForm.value.time.split(':');
+    const timeMinutes = +time[0] * 60 + +time[1];
+    console.log(timeMinutes);
+    this.dialogRef.close({
+      description: this.toDoForm.value.description,
+      dueDate: Moment(this.toDoForm.value.dueDate).add(timeMinutes, 'minutes'),
+      points: this.toDoForm.value.points,
+    });
     this.toDoForm.reset();
   }
 }
